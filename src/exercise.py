@@ -11,7 +11,12 @@ class Exercise(object):
     def requirements(self):
         return self._requirements 
 
+    def _sum_requirement_count(self):
+        return sum(requirement.counts for requirement in self._requirements)
+
     def add_requirement(self, requirement):
+        if int(self._sum_requirement_count() + requirement.counts) > self.score:
+            raise ValueError('Requirement count exceeds exercise score.')
         if not requirement.fulfilled:
             self._score.subtract(requirement.counts)
         self._requirements.append(requirement)
