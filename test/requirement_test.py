@@ -6,10 +6,6 @@ from src.requirement import Requirement
 
 class TestRequirement(unittest.TestCase):
 
-    def test_requirement_can_be_set_to_be_fulfilled(self):
-        requirement = Requirement()
-        requirement.fulfilled = True
-
     def test_requirement_has_default_text(self):
         requirement = Requirement()
         assert "Unknown" in requirement.text
