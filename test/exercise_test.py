@@ -42,15 +42,6 @@ class TestExercise(unittest.TestCase):
         """
         assert 'HTML' in exercise.text
 
-    def test_exercise_subtracts_unfilled_requirements_from_score(self):
-        exercise = Exercise()
-        exercise.score = 50
-        requirement = MagicMock()
-        requirement.fulfilled = False
-        requirement.counts = 10
-        exercise.add_requirement(requirement)
-        assert exercise.score == 40
-
     def test_exercise_does_not_subtract_fulfilled_requirements_from_score(self):
         exercise = Exercise()
         exercise.score = 50

@@ -17,8 +17,6 @@ class Exercise(object):
     def add_requirement(self, requirement):
         if int(self._sum_requirement_count() + requirement.counts) > self.score:
             raise ValueError('Requirement count exceeds exercise score.')
-        if not requirement.fulfilled:
-            self._score.subtract(requirement.counts)
         self._requirements.append(requirement)
 
     @property
