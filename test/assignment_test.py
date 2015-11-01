@@ -33,7 +33,7 @@ class TestAssignment(unittest.TestCase):
         retrieved_exercise = assignment.get_exercise(1)
         assert retrieved_exercise == exercise
 
-    def test_has_a_default_score_of_one_hundrer(self):
+    def test_has_a_default_score_of_zero(self):
         assignment = Assignment()
         assert assignment.score == 0
 
@@ -54,7 +54,7 @@ class TestAssignment(unittest.TestCase):
         assignment.add_exercise(second_exercise)
         assert assignment.score == 20
 
-    def test_score_takes_removed_exercises_into_consideration(self):
+    def test_score_is_updated_when_exercises_are_removed(self):
         assignment = Assignment()
         exercise = MagicMock()
         exercise.score = 30 
@@ -65,7 +65,7 @@ class TestAssignment(unittest.TestCase):
         assignment.remove_exercise(exercise_to_be_removed)
         assert assignment.score == 30
 
-    def test_score_can_not_exceed_one_hundred(self):
+    def test_score_can_not_exceed_one_hundred_by_adding_exercises(self):
         with self.assertRaisesRegexp(ValueError, '110'):
             assignment = Assignment()
             first_exercise = MagicMock()
