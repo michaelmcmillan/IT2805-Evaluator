@@ -16,21 +16,6 @@ class TestExercise(unittest.TestCase):
         number_of_requirements = len(requirements)
         assert number_of_requirements == 0 
 
-    def test_exercise_score_can_not_be_over_one_hundred(self):
-        with self.assertRaisesRegexp(ValueError, '\s100'):
-            exercise = Exercise()
-            exercise.score = 101
-
-    def test_exercise_score_can_not_be_over_one_hundred(self):
-        with self.assertRaisesRegexp(ValueError, '\s0'):
-            exercise = Exercise()
-            exercise.score = -1 
-
-    def test_exercise_score_must_be_an_integer(self):
-        with self.assertRaisesRegexp(TypeError, 'number'):
-            exercise = Exercise()
-            exercise.score = "50"
-
     def test_exercise_has_a_default_text(self):
         exercise = Exercise()
         assert 'Unknown' in exercise.text
@@ -41,23 +26,3 @@ class TestExercise(unittest.TestCase):
             You are to create HTML code that displays an img.
         """
         assert 'HTML' in exercise.text
-
-    def test_exercise_does_not_subtract_fulfilled_requirements_from_score(self):
-        exercise = Exercise()
-        exercise.score = 50
-        requirement = MagicMock()
-        requirement.fulfilled = True 
-        requirement.counts = 10
-        exercise.add_requirement(requirement)
-        assert exercise.score == 50
-
-    def test_exercise_raises_error_if_requirements_accounts_for_more_points_that_the_exercise_itself(self):
-        with self.assertRaisesRegexp(ValueError, 'exceeds'):
-            exercise = Exercise()
-            exercise.score = 50
-            first_requirement = MagicMock()
-            first_requirement.counts = 30
-            second_requirement = MagicMock()
-            second_requirement.counts = 30
-            exercise.add_requirement(first_requirement)
-            exercise.add_requirement(second_requirement)
