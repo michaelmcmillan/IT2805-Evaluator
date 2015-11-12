@@ -2,7 +2,7 @@
 import unittest 
 import mock
 from mock import MagicMock
-from src.assignment import Assignment
+from src.assignment import Assignment, DuplicateExerciseError 
 
 class TestAssignment(unittest.TestCase):
 
@@ -11,12 +11,30 @@ class TestAssignment(unittest.TestCase):
         number_of_exercises = len(assignment.exercises)
         assert number_of_exercises == 0
 
+    def test_assignment_number_is_none_by_default(self):
+        assert Assignment().number == None
+
+    def test_assignment_number_must_be_a_number(self):
+        with self.assertRaisesRegexp(ValueError, 'integer'):
+            assignment = Assignment(number = "two")
+
+    def test_assignment_number_can_not_be_negative(self):
+        with self.assertRaisesRegexp(ValueError, 'positive'):
+            assignment = Assignment(number = -5)
+
     def test_can_have_exercises_added(self):
         assignment = Assignment()
         exercise = MagicMock()
         assignment.add_exercise(exercise)
         number_of_exercises = len(assignment.exercises)
         assert number_of_exercises == 1
+
+    def test_error_is_raised_if_same_exercise_is_added_twice(self):
+        with self.assertRaises(DuplicateExerciseError):
+            assignment = Assignment()
+            exercise = MagicMock()
+            assignment.add_exercise(exercise)
+            assignment.add_exercise(exercise)
 
     def test_can_remove_exercise(self):
         assignment = Assignment()
