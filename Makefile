@@ -12,8 +12,12 @@ install:
 	@pip install -r requirements.txt
 
 start-selenium:
-	$(JAVA) $(SELENIUM_FLAGS)
+	$(JAVA) $(SELENIUM_FLAGS) &
+
+stop-selenium:
+	kill -9 `pidof java`
 
 start: start-selenium
+stop: stop-selenium
 
 .PHONY: test install
