@@ -6,6 +6,10 @@ from src.requirement import Requirement
 
 class TestRequirement(unittest.TestCase):
 
+    def test_requirement_is_not_fulfilled_by_default(self):
+        requirement = Requirement()
+        assert not requirement.fulfilled 
+
     def test_requirement_has_default_text(self):
         requirement = Requirement()
         assert "Unknown" in requirement.text
@@ -17,4 +21,4 @@ class TestRequirement(unittest.TestCase):
 
     def test_requirement_counts_zero_as_default(self):
         requirement = Requirement()
-        assert requirement.counts == 0
+        assert requirement.score == 0

@@ -4,12 +4,13 @@ class Requirement(object):
     
     def __init__(self):
         self.text = "Unknown requirement."
-        self._counts = Score(0)
+        self._score = Score(0)
+        self.fulfilled = False
 
     @property
-    def counts(self):
-        return self._counts._points
+    def score(self):
+        return self._score._points
 
-    @counts.setter
-    def counts(self, score):
-        self._counts = Score(score)
+    @score.setter
+    def score(self, score):
+        self._score = Score(score)
