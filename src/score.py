@@ -1,18 +1,17 @@
 class Score(object):
     
     def __init__(self, points):
-        if self._is_valid(points):
+        if self._is_valid_points(points):
             self._points = points 
 
-    def _is_valid(self, points):
-        if isinstance(points, int) == False:
+    def _is_valid_points(self, points):
+        if not isinstance(points, int):
             raise TypeError('Points must be a number.')
         elif points > 100:
-            raise ValueError('Score is over 100.')
+            raise ValueError('Points is over 100.')
         elif points < 0:
             raise ValueError('Points is under 0.')
-        else:
-            return True
+        return True
 
     @property
     def points(self):
